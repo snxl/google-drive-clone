@@ -4,6 +4,8 @@ import { Server } from 'socket.io';
 import { logger } from './logger.js';
 import Routes from './routes/index.js';
 
+process.env.USER = 'snxl';
+
 const PORT = process.env.PORT || 3000;
 
 const localHostSSL = {

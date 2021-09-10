@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
+  "engines": {
+    "node": "16.6^"
+  },
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/app.js",
@@ -10,11 +13,6 @@
     "test:watch": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest --watchAll --runInBand",
     "test:cov": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest --no-cache --runInBand --coverage"
   },
-  "eslintIgnore": [
-    "*.spec.ts",
-    "*.test.js",
-    "world.js"
-  ],
   "keywords": [],
   "author": "",
   "license": "ISC",

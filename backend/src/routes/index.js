@@ -1,8 +1,17 @@
+import { dirname, resolve } from 'path';
+import { fileURLToPath } from 'url';
 import { logger } from '../logger.js';
+import FileHelper from '../fileHelper.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const defaultDownloadsFolder = resolve(__dirname, '../', '../', 'downloads');
 
 export default class Routes {
     // io
-    constructor() {}
+    constructor(downloadsFolder = defaultDownloadsFolder) {
+        this.downloadsFolder = downloadsFolder;
+        this.fileHelper = FileHelper;
+    }
 
     setSocketInstance(io) {
         this.io = io;
@@ -18,8 +27,10 @@ export default class Routes {
     }
 
     async get(req, res) {
-        logger.info('get');
-        res.end();
+        const files = await this.fileHelper.getFilesStatus(this.downloadsFolder);
+
+        res.writeHead(200);
+        res.end(JSON.stringify(files));
     }
 
     async options(req, res) {
@@ -29,7 +40,6 @@ export default class Routes {
 
     async handler(req, res) {
         res.setHeader('Access-Control-Allow-Origin', '*');
-        console.log(this);
         const chosen = this[req.method.toLowerCase()] || this.defaultRoute;
 
         return chosen.apply(this, [req, res]);
