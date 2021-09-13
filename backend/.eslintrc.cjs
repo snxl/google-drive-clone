@@ -41,6 +41,8 @@ module.exports = {
         'no-restricted-syntax': 'off',
         'guard-for-in': 'off',
         'no-underscore-dangle': 'off',
+        'no-unused-expressions': 'off',
     },
     ignorePatterns: `**/*.test.js`,
+
 };
